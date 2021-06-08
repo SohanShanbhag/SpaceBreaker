@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <div style="background-color:black;">
+            <h1 style="color: white; text-align:center;font-size: 30px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">SpaceBreaker</h1>
+        </div>
+    </head>
+
+    <body style="background-color: darkgoldenrod; font-family:Verdana, Geneva, Tahoma, sans-serif; text-align:center">
+        <div id="wlc">
+            <br>
+            <h2>Check how many times you can press the space bar in 60 seconds!</h2>
+            <br><br><br><br><br><br><br><br><br>
+            <button type="submit" class="button" onclick="playGame()">Start</button>
+        </div>
+
+        <div id="playgame" style="display: none;">
+            <br>
+            <h2>You have pressed the space bar <span id="num" style="font-size: 40px;">0</span> times</h2>
+            <br><br><br>
+            <h3>You have <span id="time">59</span> seconds remaining</h3>
+        </div>
+
+        <div id="endscreen" style="display: none;">
+            <br>
+            <br><br><br>
+            <h2>Awesome! You scored : <span id="final">0</span></h2>
+            <button class="button" onclick="location.reload()">Restart</button>
+        </div>
+
+        <style>
+            .button{
+                background-color: blueviolet;
+                text-align: center;
+                font-size: 60px;
+                width:300px;
+                height: 100px;
+                border: 5px;
+                transition-duration: 2s;
+                cursor: pointer;
+            }
+            .button:hover{
+                background-color: aqua;
+            }
+        </style>
+
+        <script>
+            function playGame(){
+                var count=0;
+                document.getElementById("playgame").style.display = "block"
+                document.getElementById("wlc").style.display = "none"
+                document.body.onkeyup = function(e){
+                    if(e.keyCode == 32){
+                        count=count+1;
+                        document.getElementById("num").innerHTML =count;
+                    }
+                }
+                var timeLeft = 60;
+                var elem = document.getElementById('time');
+                
+                var timerId = setInterval(countdown, 1000);
+                
+                function countdown() {
+                    if (timeLeft == -1) {
+                        clearTimeout(timerId);
+                        document.getElementById('playgame').style.display = "none";
+                        document.getElementById('endscreen').style.display = "block";
+                        document.getElementById("final").innerHTML = count;
+                    } else {
+                        elem.innerHTML = timeLeft;
+                        timeLeft--;
+                    }
+                }
+
+                
+            }
+        </script>
+    </body>
+</html>
